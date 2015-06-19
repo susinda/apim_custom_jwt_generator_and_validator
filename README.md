@@ -14,20 +14,22 @@ Build the apim_custom_jwt_generator project and add the oauth2-chaingranttype-jw
 
 &lt;APIConsumerAuthentication&gt;
 ....
-&lt;TokenGeneratorImpl&gt;org.wso2.carbon.test.CustomTokenGenerator&lt;/TokenGeneratorImpl&gt;
+&lt;TokenGeneratorImpl&gt;org.wso2.carbon.apim.custom.jwt.ChainGrantTypeSupportedTokenGeneraor&lt;/TokenGeneratorImpl&gt;
 ....
 &lt;/APIConsumerAuthentication&gt;
 
 
 
-Build the apim_custom_jwt_validator_handler project and copy the JAR file to &lt;APIM_HOME&gt;/repository/components/lib folder.
+Build the apim_custom_jwt_validator_handler project and copy the JAR file to &lt;APIM2&gt;/repository/components/lib folder.
 Navigate to the folder&lt;APIM2&gt;/repository/deployment/server/synapse-configs/default/api.
 Locate the api file in which you want to add the custom handler and add it as follows.
 
-Replce the following line 
+Replce the following line
+
 &lt;handler class="org.wso2.carbon.apimgt.gateway.handlers.security.APIAuthenticationHandler"/&gt; 
 
-with 
+with
+
 &lt;handler class="org.wso2.carbon.apim.custom.JwtValidationHandler"&gt;
         &lt;property name="keystorePath" value="/home/apim/keystores/wso2carbon.jks"/&gt;
         &lt;property name="keystorePassword" value="wso2carbon"/&gt;
