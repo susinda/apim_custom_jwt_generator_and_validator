@@ -6,32 +6,33 @@ To achive this, jwt signature validation mechanism is used.
 The project 'apim_custom_jwt_generator' generates jwt token with some additonal info, and apim_custom_jwt_validator_handler project is a custom handler which does the jwt validation based on the jwt signature and the additional info provided in above jwt token.
 
 
-How to test
+Test
+
 Note that this is tried with APIM 1.8.0 only
 
-Build the apim_custom_jwt_generator project and add the oauth2-chaingranttype-jwt-1.0.0.jar file to <APIM1>/repository/components/lib/ directory of the product. Then add the following element to specify that our custom implementation should be used as the JWTGenerator. This should come under the APIConsumerAuthentication section in api-manager.xml. Also, JWT generation should be enabled at this point.
+Build the apim_custom_jwt_generator project and add the oauth2-chaingranttype-jwt-1.0.0.jar file to &lt;APIM1&gt;/repository/components/lib/ directory of the product. Then add the following element to specify that our custom implementation should be used as the JWTGenerator. This should come under the APIConsumerAuthentication section in api-manager.xml. Also, JWT generation should be enabled at this point.
 
-<APIConsumerAuthentication>
+&lt;APIConsumerAuthentication&gt;
 ....
-<TokenGeneratorImpl>org.wso2.carbon.test.CustomTokenGenerator</TokenGeneratorImpl>
+&lt;TokenGeneratorImpl&gt;org.wso2.carbon.test.CustomTokenGenerator&lt;/TokenGeneratorImpl&gt;
 ....
-</APIConsumerAuthentication>
+&lt;/APIConsumerAuthentication&gt;
 
 
 
-Build the apim_custom_jwt_validator_handler project and copy the JAR file to <APIM_HOME>/repository/components/lib folder.
-Navigate to the folder<APIM2>/repository/deployment/server/synapse-configs/default/api.
+Build the apim_custom_jwt_validator_handler project and copy the JAR file to &lt;APIM_HOME&gt;/repository/components/lib folder.
+Navigate to the folder&lt;APIM2&gt;/repository/deployment/server/synapse-configs/default/api.
 Locate the api file in which you want to add the custom handler and add it as follows.
 
 Replce the following line 
-<handler class="org.wso2.carbon.apimgt.gateway.handlers.security.APIAuthenticationHandler"/> 
+&lt;handler class="org.wso2.carbon.apimgt.gateway.handlers.security.APIAuthenticationHandler"/&gt; 
 
 with 
-<handler class="org.wso2.carbon.apim.custom.JwtValidationHandler">
-        <property name="keystorePath" value="/home/apim/keystores/wso2carbon.jks"/>
-        <property name="keystorePassword" value="wso2carbon"/>
-	<property name="keyAlias" value="wso2carbon"/>
-</handler>
+&lt;handler class="org.wso2.carbon.apim.custom.JwtValidationHandler"&gt;
+        &lt;property name="keystorePath" value="/home/apim/keystores/wso2carbon.jks"/&gt;
+        &lt;property name="keystorePassword" value="wso2carbon"/&gt;
+	&lt;property name="keyAlias" value="wso2carbon"/&gt;
+&lt;/handler&gt;
 
 Not ethat you have to have the private key of apim1 in the keystore of apim2.
 Replace the keystorePath, keystorePassword keyAlias values with your values. Given here are sample values only.
