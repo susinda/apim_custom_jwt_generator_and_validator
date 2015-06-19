@@ -24,21 +24,15 @@
     </properties> 
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>oauth2-chaingranttype-jwt</artifactId>
+    <artifactId>jwt-validation-handler</artifactId>
+    <packaging>bundle</packaging>
     <groupId>org.wso2.carbon.apim.custom</groupId>
     <version>1.0.0</version>
-	<name>WSO2 Carbon - API Manager Custom JWT Generator Project</name>
+	<name>WSO2 Carbon - API Manager JWT Validation Handler Project</name>
     <url>http://wso2.org</url>
 
     <dependencies>
-    
-    <dependency>
-	    <groupId>org.wso2.carbon.apimgt</groupId>
-	    <artifactId>org.wso2.carbon.apimgt.gateway</artifactId>
-	    <version>1.3.3</version>
-	</dependency>
-    
-        <!--dependency>
+        <dependency>
             <groupId>org.apache.synapse</groupId>
             <artifactId>synapse-extensions</artifactId>
             <version>2.1.2-wso2v6</version>
@@ -56,7 +50,18 @@
             <version>${wso2carbon.version}</version>
              <scope>provided</scope>
         </dependency>
-   
+        <!--dependency>
+            <groupId>org.wso2.carbon.mediation</groupId>
+            <artifactId>org.wso2.carbon.mediation.initializer</artifactId>
+            <version>4.2.1</version>
+             <scope>provided</scope>
+        </dependency-->
+        <!--dependency>
+            <groupId>org.wso2.carbon.apimgt</groupId>
+            <artifactId>org.wso2.carbon.throttle.core</artifactId>
+            <version>4.2.1</version>
+             <scope>provided</scope>
+        </dependency-->
         <dependency>
             <groupId>org.apache.synapse</groupId>
             <artifactId>synapse-core</artifactId>
@@ -75,7 +80,17 @@
             <version>${wso2carbon.version}</version>
              <scope>provided</scope>
         </dependency>
-
+        <!--dependency>
+            <groupId>org.wso2.carbon.apimgt</groupId>
+            <artifactId>org.wso2.carbon.apimgt.keymgt.stub</artifactId>
+            <version>4.2.3</version>
+        </dependency-->
+        <!--dependency>
+            <groupId>org.wso2.carbon.apimgt</groupId>
+            <artifactId>org.wso2.carbon.apimgt.impl</artifactId>
+            <version>1.2.3</version>
+             <scope>provided</scope>
+        </dependency-->
         <dependency>
             <groupId>org.wso2.carbon</groupId>
             <artifactId>org.wso2.carbon.ui</artifactId>
@@ -93,7 +108,7 @@
 	    <groupId>org.wso2.carbon.apimgt</groupId>
 	    <artifactId>org.wso2.carbon.apimgt.gateway</artifactId>
 	    <version>1.3.4-SNAPSHOT</version>
-	</dependency-->
+	</dependency>
 
     </dependencies>
     
@@ -112,7 +127,7 @@
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-scr-plugin</artifactId>
             </plugin-->
-            <!-- plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <version>1.4.0</version>
@@ -129,10 +144,12 @@
                             !javax.servlet.http,
                             org.wso2.carbon.test.gateway.*,
                         </Export-Package>
+                        <!--  org.apache.axiom.*; version="${axiom.osgi.version.range}", -->
                         <Import-Package>
                             !javax.xml.soap,
                             javax.xml.stream.*; version="1.0.1",
                             org.apache.axis2.rpc.receivers; version="${axis2.osgi.version.range}",
+                           
                             org.apache.axis2; version="${axis2.osgi.version.range}",
                             org.apache.axis2.description; version="${axis2.osgi.version.range}",
                             org.apache.axis2.engine; version="${axis2.osgi.version.range}",
@@ -153,10 +170,10 @@
                             javax.xml.soap; version=1.0.0,
                             *;resolution:=optional
                         </Import-Package>
-                       
+                        <!--DynamicImport-Package>org.wso2.throttle.*</DynamicImport-Package-->
                     </instructions>
                 </configuration>
-            </plugin-->
+            </plugin>
         </plugins>
     </build>
     
